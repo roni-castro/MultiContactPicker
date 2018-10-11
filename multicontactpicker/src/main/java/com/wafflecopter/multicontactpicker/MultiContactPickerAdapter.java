@@ -3,6 +3,7 @@ package com.wafflecopter.multicontactpicker;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -40,13 +41,13 @@ class MultiContactPickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_row_contact_pick_item, viewGroup, false);
         return new ContactViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if(holder instanceof ContactViewHolder) {
             ContactViewHolder contactViewHolder = (ContactViewHolder) holder;
             final Contact contactItem = getItem(i);
@@ -91,7 +92,7 @@ class MultiContactPickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 public void onClick(View view) {
                     setContactSelected(contactItem.getId());
                     if (listener != null) {
-                        listener.onContactSelected(getItem(i), getSelectedContactsCount());
+                        listener.onContactSelected(contactItem, getSelectedContactsCount());
                     }
                     notifyDataSetChanged();
                 }
